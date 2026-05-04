@@ -1,0 +1,125 @@
+// ─────────────────────────────────────────────────
+// AccounTax Database Schema
+// Prisma ORM — SQLite (Desktop-ready)
+// ─────────────────────────────────────────────────
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── المستخدم (Utilisateur) ───
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role        String   @default("accountant")
+  plan        String   @default("STARTER")
+  trialEndsAt DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  resetToken       String?
+  resetTokenExpiry DateTime?
+
+  company Company?
+}
+
+// ─── الشركة (Entreprise) ───
+model Company {
+  id      String  @id @default(uuid())
+  name    String
+  ice     String  @default("")
+  ifNum   String  @default("")
+  rc      String  @default("")
+  address String  @default("")
+  phone   String  @default("")
+  logo    String?
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  clients  Client[]
+  invoices Invoice[]
+  expenses Expense[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ─── العميل (Client) ───
+model Client {
+  id      String  @id @default(uuid())
+  name    String
+  ice     String  @default("")
+  email   String?
+  phone   String?
+  address String?
+  status  String  @default("active")
+
+  companyId String
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  invoices Invoice[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ─── الفاتورة (Facture) ───
+model Invoice {
+  id       String @id @default(uuid())
+  number   String
+  date     String
+  status   String @default("draft")
+  currency String @default("DH")
+  totalHT  Float  @default(0)
+  totalTVA Float  @default(0)
+  totalTTC Float  @default(0)
+
+  clientId  String
+  client    Client  @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  companyId String
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  items InvoiceItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ─── عنصر الفاتورة (Article de Facture) ───
+model InvoiceItem {
+  id          String @id @default(uuid())
+  description String
+  quantity    Float
+  priceHT     Float
+  tvaRate     Float
+
+  invoiceId String
+  invoice   Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+}
+
+// ─── المصروفات (Dépenses) ───
+model Expense {
+  id       String @id @default(uuid())
+  number   String
+  date     String
+  category String @default("general")
+  supplier String @default("Divers")
+  status   String @default("paid")
+  currency String @default("DH")
+  totalHT  Float  @default(0)
+  totalTVA Float  @default(0)
+  totalTTC Float  @default(0)
+
+  companyId String
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

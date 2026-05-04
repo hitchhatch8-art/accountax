@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* ─── Theme-Aware Semantic Colors ─── */
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-active: var(--surface-active);
+  --color-modal: var(--modal-bg);
+  --color-dropdown: var(--dropdown-bg);
+  --color-sidebar: var(--sidebar-bg);
+  --color-overlay: var(--overlay-bg);
+  --color-t-border: var(--t-border);
+  --color-t-border-strong: var(--t-border-strong);
+  --color-dim: var(--text-dim);
+  --color-dimmer: var(--text-dimmer);
+
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+
+  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.15);
+  --shadow-premium: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+:root {
+  --background: hsl(240 10% 3.9%);
+  --foreground: hsl(0 0% 98%);
+  --card: hsl(240 10% 3.9%);
+  --card-foreground: hsl(0 0% 98%);
+  --primary: hsl(240 5.9% 10%);
+  --primary-foreground: hsl(0 0% 98%);
+  --secondary: hsl(240 4.8% 95.9%);
+  --secondary-foreground: hsl(240 5.9% 10%);
+  --muted: hsl(240 3.7% 15.9%);
+  --muted-foreground: hsl(240 5% 64.9%);
+  --accent: hsl(240 3.7% 15.9%);
+  --accent-foreground: hsl(0 0% 98%);
+  --destructive: hsl(0 62.8% 30.6%);
+  --destructive-foreground: hsl(0 0% 98%);
+  --border: hsl(240 3.7% 15.90%);
+  --input: hsl(240 3.7% 15.90%);
+  --ring: hsl(240 4.9% 83.9%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.05);
+
+  /* ─── Semantic: Dark Mode ─── */
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-hover: rgba(255, 255, 255, 0.06);
+  --surface-active: rgba(255, 255, 255, 0.10);
+  --overlay-bg: rgba(0, 0, 0, 0.60);
+  --t-border: rgba(255, 255, 255, 0.06);
+  --t-border-strong: rgba(255, 255, 255, 0.12);
+  --modal-bg: hsl(240 15% 5%);
+  --dropdown-bg: hsl(240 12% 5%);
+  --sidebar-bg: hsl(240 10% 6%);
+  --text-dim: hsl(0 0% 83%);
+  --text-dimmer: hsl(240 5% 65%);
+}
+
+.light {
+  --background: hsl(240 20% 98%);
+  --foreground: hsl(240 10% 3.9%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(240 10% 3.9%);
+  --primary: hsl(240 5.9% 90%);
+  --primary-foreground: hsl(240 5.9% 10%);
+  --secondary: hsl(240 4.8% 10%);
+  --secondary-foreground: hsl(240 4.8% 95.9%);
+  --muted: hsl(240 4.8% 95.9%);
+  --muted-foreground: hsl(240 3.8% 46.1%);
+  --accent: hsl(240 4.8% 95.9%);
+  --accent-foreground: hsl(240 5.9% 10%);
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(0 0% 98%);
+  --border: hsl(240 5.9% 90%);
+  --input: hsl(240 5.9% 90%);
+  --ring: hsl(240 5% 64.9%);
+  --glass-bg: rgba(0, 0, 0, 0.02);
+  --glass-border: rgba(0, 0, 0, 0.06);
+
+  /* ─── Semantic: Light Mode ─── */
+  --surface: rgba(0, 0, 0, 0.03);
+  --surface-hover: rgba(0, 0, 0, 0.05);
+  --surface-active: rgba(0, 0, 0, 0.08);
+  --overlay-bg: rgba(0, 0, 0, 0.35);
+  --t-border: rgba(0, 0, 0, 0.08);
+  --t-border-strong: rgba(0, 0, 0, 0.14);
+  --modal-bg: hsl(0 0% 100%);
+  --dropdown-bg: hsl(0 0% 100%);
+  --sidebar-bg: hsl(0 0% 98%);
+  --text-dim: hsl(240 5% 34%);
+  --text-dimmer: hsl(240 5% 46%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* RTL Support */
+  [dir="rtl"] {
+    font-family: 'Cairo', sans-serif;
+  }
+  
+  [dir="ltr"] {
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Autofill Fix for Dark/Light Mode */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--color-background) inset !important;
+    -webkit-text-fill-color: var(--color-foreground) !important;
+    caret-color: var(--color-foreground) !important;
+  }
+}
+
+@layer components {
+  .btn-premium {
+    @apply relative overflow-hidden rounded-2xl px-6 py-3 font-medium transition-all duration-300;
+    @apply bg-indigo-600 text-white shadow-glow hover:bg-indigo-500 hover:shadow-indigo-500/25;
+  }
+
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    @apply rounded-2xl;
+  }
+  
+  .glow-indigo {
+    @apply relative;
+  }
+  
+  .glow-indigo::after {
+    content: '';
+    @apply absolute -inset-1 bg-indigo-500/10 blur-xl opacity-0 transition-opacity duration-500 rounded-3xl;
+  }
+  
+  .glow-indigo:hover::after {
+    @apply opacity-100;
+  }
+}
