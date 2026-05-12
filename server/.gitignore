@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.env
+check_supabase.cjs
+check_supabase.js
+test_db.js

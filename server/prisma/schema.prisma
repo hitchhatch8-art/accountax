@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────
 // AccounTax Database Schema
-// Prisma ORM — SQLite (Desktop-ready)
+// Prisma ORM — PostgreSQL (Supabase)
 // ─────────────────────────────────────────────────
 
 generator client {
@@ -8,8 +8,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 // ─── المستخدم (Utilisateur) ───
