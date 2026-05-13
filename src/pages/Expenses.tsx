@@ -12,8 +12,8 @@ const Expenses: React.FC = () => {
   const [isAdding, setIsAdding] = useState(false);
 
   // Form State
-  const [date] = useState(new Date().toISOString().split('T')[0]);
-  const [number, setNumber] = useState(`EXP-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`);
+  const [date] = useState(() => new Date().toISOString().split('T')[0]);
+  const [number, setNumber] = useState(() => `EXP-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`);
   const [supplier, setSupplier] = useState('');
   const [category, setCategory] = useState('Achats');
   const [totalHT, setTotalHT] = useState('');
@@ -148,6 +148,8 @@ const Expenses: React.FC = () => {
                       <button 
                         onClick={() => handleDelete(exp.id, exp.number)}
                         className="p-2 text-zinc-500 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all"
+                        aria-label={language === 'fr' ? 'Supprimer' : 'حذف'}
+                        title={language === 'fr' ? 'Supprimer' : 'حذف'}
                       >
                         <Trash2 size={16} />
                       </button>
@@ -183,6 +185,8 @@ const Expenses: React.FC = () => {
               <button 
                 onClick={() => setIsAdding(false)}
                 className="absolute top-6 right-6 p-2 bg-surface hover:bg-surface-active rounded-xl text-dimmer hover:text-foreground transition-colors"
+                aria-label={language === 'fr' ? 'Fermer' : 'إغلاق'}
+                title={language === 'fr' ? 'Fermer' : 'إغلاق'}
                >
                  <X size={20} />
               </button>
@@ -204,12 +208,12 @@ const Expenses: React.FC = () => {
                <div className="space-y-6">
                  <div className="grid grid-cols-2 gap-4">
                    <div>
-                     <label className="text-xs font-bold text-zinc-500 mb-2 block">{t('supplier')}*</label>
-                     <input type="text" value={supplier} onChange={(e) => setSupplier(e.target.value)} className="w-full bg-surface border border-t-border-strong rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:border-indigo-500" placeholder="Ex: Maroc Telecom" />
+                     <label htmlFor="supplier-input" className="text-xs font-bold text-zinc-500 mb-2 block">{t('supplier')}*</label>
+                     <input id="supplier-input" title={t('supplier')} aria-label={t('supplier')} type="text" value={supplier} onChange={(e) => setSupplier(e.target.value)} className="w-full bg-surface border border-t-border-strong rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:border-indigo-500" placeholder="Ex: Maroc Telecom" />
                    </div>
                    <div>
-                     <label className="text-xs font-bold text-zinc-500 mb-2 block">{t('category')}</label>
-                     <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full bg-dropdown border border-t-border-strong rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:border-indigo-500">
+                     <label htmlFor="category-select" className="text-xs font-bold text-zinc-500 mb-2 block">{t('category')}</label>
+                     <select id="category-select" title={t('category')} aria-label={t('category')} value={category} onChange={(e) => setCategory(e.target.value)} className="w-full bg-dropdown border border-t-border-strong rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:border-indigo-500">
                        <option value="Achats">Achats de marchandises</option>
                        <option value="Services">Services externes</option>
                        <option value="Taxes">Impôts et Taxes</option>
@@ -221,12 +225,12 @@ const Expenses: React.FC = () => {
 
                  <div className="grid grid-cols-2 gap-4">
                    <div>
-                     <label className="text-xs font-bold text-zinc-500 mb-2 block">{language === 'fr' ? 'Montant HT (DH)' : 'المبلغ الصافي (DH)'}*</label>
-                     <input type="number" value={totalHT} onChange={(e) => setTotalHT(e.target.value)} className="w-full bg-surface border border-t-border-strong rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:border-indigo-500" />
+                     <label htmlFor="amount-input" className="text-xs font-bold text-zinc-500 mb-2 block">{language === 'fr' ? 'Montant HT (DH)' : 'المبلغ الصافي (DH)'}*</label>
+                     <input id="amount-input" title={language === 'fr' ? 'Montant HT (DH)' : 'المبلغ الصافي (DH)'} aria-label={language === 'fr' ? 'Montant HT (DH)' : 'المبلغ الصافي (DH)'} type="number" value={totalHT} onChange={(e) => setTotalHT(e.target.value)} className="w-full bg-surface border border-t-border-strong rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:border-indigo-500" />
                    </div>
                    <div>
-                     <label className="text-xs font-bold text-zinc-500 mb-2 block">{language === 'fr' ? 'Taux TVA' : 'نسبة الضريبة'}</label>
-                     <select value={tvaRate} onChange={(e) => setTvaRate(Number(e.target.value))} className="w-full bg-dropdown border border-t-border-strong rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:border-indigo-500">
+                     <label htmlFor="tva-select" className="text-xs font-bold text-zinc-500 mb-2 block">{language === 'fr' ? 'Taux TVA' : 'نسبة الضريبة'}</label>
+                     <select id="tva-select" title={language === 'fr' ? 'Taux TVA' : 'نسبة الضريبة'} aria-label={language === 'fr' ? 'Taux TVA' : 'نسبة الضريبة'} value={tvaRate} onChange={(e) => setTvaRate(Number(e.target.value))} className="w-full bg-dropdown border border-t-border-strong rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:border-indigo-500">
                        <option value="20">20%</option>
                        <option value="14">14%</option>
                        <option value="10">10%</option>

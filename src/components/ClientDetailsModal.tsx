@@ -86,6 +86,8 @@ const ClientDetailsModal: React.FC<ClientDetailsModalProps> = ({ client, isOpen,
               <button 
                 onClick={onClose} 
                 className="p-2.5 bg-surface hover:bg-surface-active rounded-xl text-dimmer hover:text-foreground transition-all"
+                aria-label={language === 'fr' ? 'Fermer' : 'إغلاق'}
+                title={language === 'fr' ? 'Fermer' : 'إغلاق'}
               >
                 <X size={20} />
               </button>

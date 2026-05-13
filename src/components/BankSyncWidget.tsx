@@ -60,6 +60,8 @@ const BankSyncWidget = () => {
               onClick={handleImport}
               className={`p-2 rounded-xl transition-all ${bank.status === 'Ready' ? 'bg-surface text-dim hover:bg-indigo-500 hover:text-white' : 'opacity-0 disabled cursor-default'}`}
               disabled={bank.status !== 'Ready'}
+              aria-label={language === 'fr' ? 'Synchroniser' : 'مزامنة'}
+              title={language === 'fr' ? 'Synchroniser' : 'مزامنة'}
             >
               {bank.status === 'Ready' && <RefreshCcw size={16} />}
             </button>
