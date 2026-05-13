@@ -79,7 +79,7 @@ app.get('/api/health', (_req, res) => {
 
 // ─── Global Error Handler ───
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+app.use((err: Error & { status?: number }, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error('❌ Server Error:', err.message);
   res.status(err.status || 500).json({
     error: err.message || 'Internal Server Error',
