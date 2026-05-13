@@ -11,7 +11,7 @@ import companyRoutes from './routes/company.js';
 import expensesRoutes from './routes/expenses.js';
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = parseInt(process.env.PORT as string, 10) || 3001;
 
 // ─── Allowed Origins ───
 const allowedOrigins = [
@@ -58,7 +58,15 @@ app.use('/api/invoices', invoiceRoutes);
 app.use('/api/company', companyRoutes);
 app.use('/api/expenses', expensesRoutes);
 
-// ─── Health Check ───
+// ─── Health Check & Root ───
+app.get('/', (_req, res) => {
+  res.json({
+    message: 'Welcome to AccounTax API',
+    status: 'online',
+    version: '1.2.0'
+  });
+});
+
 app.get('/api/health', (_req, res) => {
   res.json({
     status: 'ok',
@@ -70,6 +78,7 @@ app.get('/api/health', (_req, res) => {
 });
 
 // ─── Global Error Handler ───
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error('❌ Server Error:', err.message);
   res.status(err.status || 500).json({
@@ -78,7 +87,7 @@ app.use((err: any, _req: express.Request, res: express.Response, _next: express.
 });
 
 // ─── Start ───
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`
   ╔══════════════════════════════════════════╗
   ║  🚀 AccounTax API Server v1.2           ║
