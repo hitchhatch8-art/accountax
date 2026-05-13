@@ -4,7 +4,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useStore, type Client } from '../store/useStore';
 import { formatCurrency } from '../lib/formatters';
 import { 
-  X, ShieldCheck, ShieldAlert, Mail, Phone, MapPin, Hash, 
+  X, Mail, Phone, MapPin, Hash, 
   FileText, TrendingUp, Clock, CheckCircle2 
 } from 'lucide-react';
 

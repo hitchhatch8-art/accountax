@@ -2,7 +2,7 @@ import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useStore } from '../store/useStore';
 import { motion } from 'framer-motion';
-import { FileText, Upload, Folder, Receipt, Users, Landmark } from 'lucide-react';
+import { FileText, Upload, Receipt, Users, Landmark } from 'lucide-react';
 
 const Documents: React.FC = () => {
   const { language, t } = useLanguage();

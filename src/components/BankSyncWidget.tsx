@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { CheckCircle2, RefreshCcw, Plus, RefreshCw } from 'lucide-react';
-import toast from 'react-hot-toast';
+import { RefreshCcw, Plus } from 'lucide-react';
 import BankImportModal from './BankImportModal';
 
 const initialBanks = [
@@ -11,7 +10,7 @@ const initialBanks = [
 
 const BankSyncWidget = () => {
   const { language } = useLanguage();
-  const [banks, setBanks] = useState(initialBanks);
+  const [banks] = useState(initialBanks);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleImport = () => {

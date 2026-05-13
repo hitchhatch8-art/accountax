@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { useStore, type Expense } from '../store/useStore';
+import { useStore } from '../store/useStore';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Trash2, Receipt, TrendingDown, X, Calculator } from 'lucide-react';
 import { formatCurrency } from '../lib/formatters';
@@ -12,7 +12,7 @@ const Expenses: React.FC = () => {
   const [isAdding, setIsAdding] = useState(false);
 
   // Form State
-  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+  const [date] = useState(new Date().toISOString().split('T')[0]);
   const [number, setNumber] = useState(`EXP-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`);
   const [supplier, setSupplier] = useState('');
   const [category, setCategory] = useState('Achats');
@@ -24,14 +24,6 @@ const Expenses: React.FC = () => {
 
   const totalExpensesTTC = expenses.reduce((sum, e) => sum + e.totalTTC, 0);
   const totalTvaDeductible = expenses.reduce((sum, e) => sum + e.totalTVA, 0);
-
-  const getStatusColor = (status: Expense['status']) => {
-    switch (status) {
-      case 'paid': return 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20';
-      case 'pending': return 'bg-amber-500/10 text-amber-500 border-amber-500/20';
-      default: return 'bg-zinc-500/10 text-zinc-500 border-zinc-500/20';
-    }
-  };
 
   const handleDelete = (id: string, ref: string) => {
     if (confirm(language === 'fr' ? `Supprimer la dépense ${ref} ?` : `حذف المصروف ${ref}؟`)) {

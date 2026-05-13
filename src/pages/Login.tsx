@@ -217,7 +217,7 @@ const Login: React.FC = () => {
                   <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-indigo-400 transition-colors" size={18} />
                   <input 
                     type={showPassword ? "text" : "password"} 
-                    required={authMode !== 'forgot'}
+                    required
                     minLength={6}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
